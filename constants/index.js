@@ -1,0 +1,37 @@
+export const category =[
+{
+    id:1,
+    name:'pizza',
+    image:require('../assets/images/dishes/images1.jpeg'),
+},
+{
+    id:2,
+    name:'pizza',
+    image:require('../assets/images/dishes/images1.jpeg'),
+},
+{
+    id:3,
+    name:'pizza',
+    image:require('../assets/images/dishes/images1.jpeg'),
+},
+{
+    id:4,
+    name:'pizza',
+    image:require('../assets/images/dishes/images1.jpeg'),
+},
+{
+    id:5,
+    name:'pizza',
+    image:require('../assets/images/dishes/images1.jpeg'),
+},
+{
+    id:6,
+    name:'pizza',
+    image:require('../assets/images/dishes/images1.jpeg'),
+},
+{
+    id:7,
+    name:'pizza',
+    image:require('../assets/images/dishes/images1.jpeg'),
+},
+];
