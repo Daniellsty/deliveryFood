@@ -11,7 +11,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 const HomeScreen = () => {
   return (
     <SafeAreaView className="bg-white ">
-      {/* <StatusBar barStyle="dark-content" /> */}
+      <StatusBar barStyle="dark-content" />
       <View className="flex-row items-center space-x-2 px-4 pb-2">
         <View className="flex-row flex-1 items-center p-3  rounded-full border border-gray-300">
           <AntDesign name="search1" size={25} color="gray" />
