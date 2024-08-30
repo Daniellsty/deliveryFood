@@ -1,9 +1,4 @@
-import StackNavigation from '../Navigation/StackNavigation';
-import { NativeWindStyleSheet } from "nativewind";
-
-// NativeWindStyleSheet.setOutput({
-//   default: "native",
-// });
+import StackNavigation from '../navigation/StackNavigation';
 
 const _layout = () => {
   return (
