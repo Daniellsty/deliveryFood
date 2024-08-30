@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, Image, TouchableOpacity, StatusBar } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "expo-router";
 
@@ -19,6 +19,7 @@ const ResturantScreen = () => {
   return (
     <View>
       <CardIcon/>
+      <StatusBar barStyle="light-content"/>
       <ScrollView>
         <View className="relative">
           <Image source={item.image} className="w-full h-72" />
