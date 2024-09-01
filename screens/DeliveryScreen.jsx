@@ -3,19 +3,34 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import Entypo from "@expo/vector-icons/Entypo";
+import { useDispatch, useSelector } from "react-redux";
+import { selectResturant } from "@/redux/resturantSlice";
+import { emptyCart } from "@/redux/cartSlice";
+import {Platform} from 'react-native';
+
 const DeliveryScreen = () => {
+
+  const deliveryImg = Platform.OS === 'ios' ? require("../assets/images/Delivery.gif") : require("../assets/images/bikeGuy.png")
+
   const navigation = useNavigation();
-  const restaurant = {};
+  const restaurant = useSelector(selectResturant);
+  const dispatch = useDispatch();
+
+  const cancelOrder=()=>{
+    navigation.navigate('Home');
+    dispatch(emptyCart());
+  }
+
+ 
 
   return (
     <View className="flex-1">
-      <Text>DeliveryScreen</Text>
       <MapView
         initialRegion={{
           latitude: restaurant?.lat,
           longitude: restaurant?.lng,
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
         }}
         className="flex-1"
         mapType="standard"
@@ -43,7 +58,7 @@ const DeliveryScreen = () => {
           </View>
           <Image
             className="w-24 h-24"
-            source={require("../assets/images/dishes/bikeGuy.png")}
+            source={require("../assets/images/bikeGuy.png")}
           />
         </View>
         <View
@@ -55,14 +70,13 @@ const DeliveryScreen = () => {
             style={{ backgroundColor: "rgba(255,255,255,0.4)" }}
           >
             <Image
-              source={require("../assets/images/dishes/Delivery.gif")}
+              source={deliveryImg}
               className="h-16 w-16 rounded-full"
             />
           </View>
           <View className="flex-1 ml-3">
             <Text className="text-lg font-bold text-white"> user</Text>
             <Text className="text-lg font-semibold text-white capitalize">
-              {" "}
               your rider
             </Text>
           </View>
@@ -72,7 +86,7 @@ const DeliveryScreen = () => {
             </TouchableOpacity>
 
             <TouchableOpacity 
-            onPress={()=> navigation.navigate('Home') }
+            onPress={cancelOrder  }
             className="bg-white p-2 rounded-full">
             <Entypo name="circle-with-cross" size={24} color="red" />           
              </TouchableOpacity>
