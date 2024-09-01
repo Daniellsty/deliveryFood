@@ -8,7 +8,10 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import CardIcon from '../components/CardIcon';
 import DishRow from '../components/DishRow';
 import { themeColors } from "@/theme/themeColor";
-import { category } from "@/constants";
+import { urlFor } from "@/SanityClient";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setResturants } from "@/redux/resturantSlice";
 
 
 const ResturantScreen = () => {
@@ -16,13 +19,21 @@ const ResturantScreen = () => {
   const item = params;
   const navigation = useNavigation();
 
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(item && item._id){   
+      dispatch(setResturants(item))
+    }
+  },[item])
+
   return (
     <View>
       <CardIcon/>
       <StatusBar barStyle="light-content"/>
       <ScrollView>
         <View className="relative">
-          <Image source={item.image} className="w-full h-72" />
+          <Image source={{uri:urlFor(item.image).url()}} className="w-full h-72" />
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             className="absolute top-14  left-4 bg-gray-50 p-2 rounded-full shadow"
@@ -47,7 +58,7 @@ const ResturantScreen = () => {
                   <Text className="text-green-700">{item?.stars}</Text>
                   <Text className="text-gray-700">
                     ({item?.reviews} review) .
-                    <Text className="font-semibold">{item?.category}</Text>
+                    <Text className="font-semibold">{item?.type?.name}</Text>
                   </Text>
                 </Text>
               </View>
@@ -60,7 +71,7 @@ const ResturantScreen = () => {
               </View>
             </View>
             <Text className="text-gray-500 mt-2">
-            {item.description}
+            {item?.description}
             </Text>
           </View>
         </View>
@@ -69,10 +80,10 @@ const ResturantScreen = () => {
         Menu
         </Text>
         {
-          category.map((items,index)=>{
+          item?.dishes.map((items,index)=>{
             return(
               <DishRow
-              item={items}
+              item={{...items}}
               key={index}
               />
             )
