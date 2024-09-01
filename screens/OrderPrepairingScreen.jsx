@@ -20,7 +20,7 @@ const OrderPrepairingScreen = () => {
     <View className="flex-1 bg-white justify-center items-center">
       <Image
       className="w-80 h-80"
-      source={require('../assets/images/dishes/Delivery.gif')} />
+      source={require('../assets/images/Delivery.gif')} />
     </View>
   )
 }
