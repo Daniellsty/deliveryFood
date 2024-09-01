@@ -12,11 +12,7 @@ const StackNavigation = () => {
 
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
+      <Stack.Navigator screenOptions={{headerShown:false}}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Resturant" component={ResturantScreen} />
         <Stack.Screen name="Cart" options={{presentation:"modal"}} component={CartScreen} />
