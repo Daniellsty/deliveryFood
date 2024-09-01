@@ -1,14 +1,28 @@
 import { themeColors } from "../theme/themeColor";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
-import { category } from "@/constants";
 
 import { View, Text, StatusBar, TextInput, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Feather from '@expo/vector-icons/Feather';
+import Feather from "@expo/vector-icons/Feather";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { useEffect, useState } from "react";
+import { getFeaturedResturants } from "@/api";
 
 const HomeScreen = () => {
+  const [featured, setFeatured] = useState([]);
+
+  useEffect(() => {
+    try {
+      getFeaturedResturants().then((data) => {
+        setFeatured(data);
+        
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <SafeAreaView className="bg-white ">
       <StatusBar barStyle="dark-content" />
@@ -36,11 +50,17 @@ const HomeScreen = () => {
         }}
       >
         <Categories />
-        <View className="mt-5">
-          {category.map((item, index) => {
-            return(
-              <FeaturedRow key={index} title={item.name} />
-            )
+        <View className="my-5">
+          {featured.map((item, index) => {
+
+            return (
+              <FeaturedRow
+                key={index}
+                title={item.name}
+                description={item.description}
+                restaurants={item.resturant}
+              />
+            );
           })}
         </View>
       </ScrollView>
